@@ -102,13 +102,8 @@ you should start with one of these commands
 ```bash
 python3 loop_datamaker.py
 ```
-***⬇you have to re-run the script each run⬇***
 
-```bash
-python3 datasetmake.py
-```
-
-after the execution of ***ONE*** of the scripts you should switch to your game window
+after the execution of the script you should switch to your game window
 
 >the game window should be windowed fullscreen for the code to work automatically
 
@@ -118,8 +113,7 @@ after the execution of ***ONE*** of the scripts you should switch to your game w
 press ***F1*** to start capturing. then play the game and press ***F10*** to stop and save
 > NOTE 1. you need to play the game smoothly and correctly for the model to be good
 
-> NOTE 2. if you run ```python3 datasetmake.py``` you will need to re-start the script
-> if you run ```python3 loop_datamaker.py``` you can just press ***F1*** to start capturing again
+> NOTE 2. you can just press ***F1*** to start capturing again
 
 ***the keys that are geting captured are just  ```Shift```, ```Ctrl```, ```w```, ```a```, ```s```, ```d```, ```q```, ```e``` and ```mouse movment```***
 
