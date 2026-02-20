@@ -391,8 +391,7 @@ mouse.release(button='right')
 
 ## exetra 
 
-you can run ```bash
-python3 cluster.py```
+you can run ```python3 cluster.py```
 
 to visualize patterns in the training data.
 
