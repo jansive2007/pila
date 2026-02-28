@@ -83,7 +83,7 @@ cd pila
 after you successfully cloned the repo you will need to install the requirements for the code to work correctly to do that run this command
 
 ```bash
-pip -r requirements.txt
+pip install -r requirements.txt
 ```
 
 or install the manually
