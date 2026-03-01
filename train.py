@@ -118,8 +118,8 @@ class ControlNet(nn.Module):
 # nonzero attention computation
 
 def compute_attention(actions):
-    mouse_mag = torch.norm(actions[:, 4:6], dim=1)
-    key_mag = torch.norm(actions[:, :4], dim=1)
+    mouse_mag = torch.norm(actions[:, 5:7], dim=1)
+    key_mag = torch.norm(actions[:, :5], dim=1)
 
     mag = 1.5 * mouse_mag + 1.0 * key_mag
     attn = torch.tanh(mag * ATTN_SCALE)  # range 0–1
