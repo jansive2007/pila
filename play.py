@@ -10,7 +10,7 @@ from torch import nn
 time.sleep(5)
 
 # config start
-MODEL_PATH = "checkpoints/checkpoint_epoch_50.pth"
+MODEL_PATH = "models/control_model.pth"
 
 IMG_SIZE = 256
 FRAME_STACK = 4
@@ -183,7 +183,7 @@ while not keyboard.is_pressed(STOP_KEY):
     if left_click > CLICK_THRESH:
         mouse.press(button='left')
         mouse.release(button='right')
-    elif right_click < -CLICK_THRESH:
+    elif right_click > CLICK_THRESH:
         mouse.press(button='right')
         mouse.release(button='left')
     else:
