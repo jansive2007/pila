@@ -135,7 +135,7 @@ def main():
         dataset,
         batch_size=BATCH_SIZE,
         shuffle=True,
-        num_workers=0,      # Windows safe
+        num_workers=4,
         pin_memory=True,
         drop_last=True
     )

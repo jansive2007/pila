@@ -19,9 +19,10 @@ Instead of manually programming behavior, PILA uses **supervised learning** to m
 </div>
 
 <div align='center'>
-  imitation learning agent driving view
+  imitation learning agent driving POV's
   <br>
   <img alt="AGENT VIEW" src="https://github.com/tryfonaskam/pila/blob/main/gifs/agent_view.gif">
+  <img alt="final result" src="https://github.com/tryfonaskam/pila/blob/main/gifs/final.gif">
 </div>
 
 ---
@@ -173,6 +174,23 @@ after that you have ~5 seconds to switch to your game
 >NOTE: it needs to be the same size and resolution as in training
 
 now the model will play the game
+
+## Tuning Performance
+If the model is not performing as expected, you can improve its behavior by adjusting parameters in `play.py`.
+
+
+
+```python
+MOUSE_SCALE_X = 0.0
+MOUSE_SCALE_Y = 0.0
+QE_THRESH = 0.008
+SHIFT_CTRL_THRESH = 0.005
+WASD_THRESH = 0.25
+SPACE_THRESH = 0.5
+CLICK_THRESH = 0.5
+MOUSE_ALPHA = 0.6
+SHIFT_CTRL_ALPHA = 0.05
+```
 
 >[!IMPORTANT]
 >if anything goes wrong press "esc" to stop the model
@@ -389,7 +407,7 @@ mouse.release(button='left')
 mouse.release(button='right')
 ```
 
-## exetra 
+## extra 
 
 you can run ```python3 cluster.py```
 
@@ -400,6 +418,10 @@ to visualize patterns in the training data.
   <img src="https://github.com/tryfonaskam/pila/blob/main/gifs/patterns.png" alt="pattern view" style="max-width:50%; height:auto;">
 </div>
 
+## Contributing & Feedback
+
+Have ideas, improvements, or demo videos to share?  
+Feel free to reach out or open an issue — contributions and feedback are always welcome!
 
 ---
 
@@ -412,3 +434,4 @@ Designed and implemented the full imitation learning pipeline, including data ca
 Helped shape the initial project direction, identifying PolyTrack as an appropriate environment for imitation learning, and contributing a custom-designed test track used for evaluation.
 
 **[polytrack](https://kodub.itch.io/polytrack)** - the game used for training the model, and play the model
+
