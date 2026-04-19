@@ -1,4 +1,5 @@
 import time
+import os
 import cv2
 import torch
 import dxcam
@@ -61,22 +62,43 @@ print("[INFO] Loading model...")
 model = ControlNet().to(DEVICE)
 
 # auto loading of different checkpoint formats
+MODEL_CANDIDATES = [
+    MODEL_PATH,
+    "multighost_model.pt",
+]
 
-checkpoint = torch.load(MODEL_PATH, map_location=DEVICE)
+resolved_model_path = next((p for p in MODEL_CANDIDATES if os.path.exists(p)), None)
+if resolved_model_path is None:
+    searched_paths = ", ".join(MODEL_CANDIDATES)
+    raise FileNotFoundError(
+        f"No model checkpoint found. Searched: {searched_paths}. "
+        "Train a model first (python train.py) or update MODEL_PATH in play.py."
+    )
+
+print(f"[INFO] Using checkpoint: {resolved_model_path}")
+checkpoint = torch.load(resolved_model_path, map_location=DEVICE)
 
 if isinstance(checkpoint, dict):
     if "model" in checkpoint:
-        model.load_state_dict(checkpoint["model"])
+        model_state = checkpoint["model"]
         print(f"[INFO] Loaded checkpoint from epoch {checkpoint.get('epoch', '?')}")
     elif "model_state" in checkpoint:
-        model.load_state_dict(checkpoint["model_state"])
+        model_state = checkpoint["model_state"]
         print(f"[INFO] Loaded checkpoint from epoch {checkpoint.get('epoch', '?')}")
     else:
-        model.load_state_dict(checkpoint)
+        model_state = checkpoint
         print("[INFO] Loaded raw model state_dict")
 else:
-    model.load_state_dict(checkpoint)
+    model_state = checkpoint
     print("[INFO] Loaded raw model state_dict")
+
+try:
+    model.load_state_dict(model_state)
+except RuntimeError as e:
+    raise RuntimeError(
+        "Checkpoint is not compatible with play.py ControlNet (9 outputs). "
+        "If you trained with train_multighost_example.py (8 outputs), this player cannot use it directly."
+    ) from e
 
 model.eval()
 
